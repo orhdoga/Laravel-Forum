@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ThreadsTest extends TestCase
+class ReadThreadsTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -28,5 +28,11 @@ class ThreadsTest extends TestCase
 
         $response = $this->get('/threads/' . $thread->id);
         $response->assertSee($thread->title);
-    }    
+    }
+
+    /** @test */
+    public function a_user_can_read_replies_that_are_associated_with_a_thread()
+    {
+        //
+    }     
 }
