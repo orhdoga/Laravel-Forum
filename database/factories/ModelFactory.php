@@ -23,9 +23,34 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Product::class, function (Faker\Generator $faker) {
+$factory->define(App\Thread::class, function ($faker) {
     return [
-        'name' => $faker->name,
-        'price' => rand(30, 80)
+        'user_id' => function () {
+            return factory(App\User::class)->create()->id;
+        },
+        'title' => $faker->sentence,
+        'body' => $faker->paragraph
     ];
 });
+
+$factory->define(App\Reply::class, function ($faker) {
+    return [
+        'thread_id' => function () {
+            return factory(App\Thread::class)->create()->id;
+        },
+        'user_id' => function () {
+            return factory(App\User::class)->create()->id;
+        },
+        'body' => $faker->paragraph
+    ];
+});
+
+/* 
+$threads->each(function ($thread)) {
+    factory(App\Reply::class, 10)->create(['thread_id' => $thread->id]);
+}); 
+*/
+
+/* 
+Give 10 replies foreach $thread. Then associate the 'thread_id' (key) foreach $thread, so you don't create another 10 $threads.
+/*
