@@ -46,7 +46,7 @@ $factory->define(App\Reply::class, function ($faker) {
 });
 
 /* 
-$threads->each(function ($thread)) {
+$threads->each(function ($thread) {
     factory(App\Reply::class, 10)->create(['thread_id' => $thread->id]);
 }); 
 */
