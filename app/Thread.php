@@ -4,8 +4,6 @@ namespace App;
 
 class Thread extends ForumModel
 {
-	protected $guarded = [];
-
     public function path()
     {
     	return '/threads/' . $this->id;
