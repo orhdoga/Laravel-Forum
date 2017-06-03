@@ -5,8 +5,6 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-use App\{Thread};
-
 class ThreadTest extends TestCase
 {
 	protected $thread;
@@ -17,7 +15,7 @@ class ThreadTest extends TestCase
 	{
 		parent::setUp();
 
-		$this->thread = create(Thread::class);
+		$this->thread = create('App\Thread');
 	}
 
     /** @test */
@@ -55,7 +53,7 @@ class ThreadTest extends TestCase
     /** @test */
     function a_thread_belongs_to_a_channel()
     {
-        $thread = create(Thread::class);
+        $thread = create('App\Thread');
 
         $this->assertInstanceOf('App\Channel', $thread->channel);
     }

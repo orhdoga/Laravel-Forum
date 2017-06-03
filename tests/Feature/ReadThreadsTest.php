@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-use App\{Thread, Reply};
 class ReadThreadsTest extends TestCase
 {
     use DatabaseMigrations;
@@ -14,7 +13,7 @@ class ReadThreadsTest extends TestCase
     {
         parent::setUp();
 
-        $this->thread = create(Thread::class);
+        $this->thread = create('App\Thread');
     }
 
     /** @test */
@@ -35,7 +34,7 @@ class ReadThreadsTest extends TestCase
     public function a_user_can_read_replies_that_are_associated_with_a_thread()
     {
         // Thread includes reply.
-        $reply = create(Reply::class, ['thread_id' => $this->thread->id]);
+        $reply = create('App\Reply', ['thread_id' => $this->thread->id]);
         // When visiting the thread, we should see the replies.
         $this->get($this->thread->path())
             ->assertSee($reply->body);
