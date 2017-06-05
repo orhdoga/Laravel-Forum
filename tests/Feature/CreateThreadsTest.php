@@ -24,18 +24,18 @@ class CreateThreadsTest extends TestCase
 	}
 
 	/** @test */
-	// function an_authenticated_user_can_create_new_forum_threads()
-	// {
-	// 	$this->signIn();
+	function an_authenticated_user_can_create_new_forum_threads()
+	{
+		$this->signIn();
 
-	// 	$thread = make('App\Thread');
+		$thread = make('App\Thread');
 
-	// 	$response = $this->post('/threads', $thread->toArray());
+		$response = $this->post('/threads', $thread->toArray());
 
-	// 	$this->get($response->headers->get('Location'))
-	// 		->assertSee($thread->title)
-	// 		->assertSee($thread->body);
-	// }
+		$this->get($response->headers->get('Location'))
+			->assertSee($thread->title)
+			->assertSee($thread->body);
+	}
 
 	/** @test */
 	function a_thread_requires_a_title()
