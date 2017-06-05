@@ -35,33 +35,46 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    @if (Auth::user())
-                        <ul class="nav navbar-nav">
-                            <li {{ Request::is('threads') ? 'class=active' : '' }}>
-                                <a href="{{ url('/threads') }}">
-                                    All Threads
-                                </a>
-                            </li> 
+                    <ul class="nav navbar-nav"> 
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse <span class="caret"></span></a>
 
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ url('/threads') }}">
+                                        All Threads
+                                    </a>
+                                </li>
+                                @if (Auth::check())
+                                    <li>
+                                        <a href="{{ url('/threads?by=' . auth()->user()->name) }}">
+                                            My Threads
+                                        </a>
+                                    </li>
+                                @endif    
+                            </ul>
+                        </li>
+
+                        @if (Auth::check())
                             <li>
                                 <a href="{{ route('thread.create') }}">New Thread</a>
-                            </li>
+                            </li>  
+                        @endif     
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Channels <span class="caret"></span></a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Channels <span class="caret"></span></a>
 
-                                <ul class="dropdown-menu">
-                                    @foreach ($channels as $channel)
-                                        <li>
-                                            <a href="{{ url('/threads/' . $channel->slug) }}">
-                                                {{ ucfirst($channel->name) }}
-                                            </a>
-                                        </li>    
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </ul>
-                    @endif
+                            <ul class="dropdown-menu">
+                                @foreach ($channels as $channel)
+                                    <li>
+                                        <a href="{{ url('/threads/' . $channel->slug) }}">
+                                            {{ ucfirst($channel->name) }}
+                                        </a>
+                                    </li>    
+                                @endforeach
+                            </ul>
+                        </li>
+                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
